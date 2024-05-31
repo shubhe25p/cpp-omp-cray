@@ -128,6 +128,103 @@ Flopcount: 137.472508 GFLOP
 Best (7)      0.146026 sec     941.427918 GFLOPs
 ```
 
+## For CPP runs without cmake
+1. Hop on a compute node with salloc and load PrgEnv-cray
+```
+shubhp@nid006942:~/cpp-omp-cray> ml PrgEnv-cray
+
+Lmod is automatically replacing "gcc-native/12.3" with "cce/17.0.0".
+
+
+Lmod is automatically replacing "PrgEnv-gnu/8.5.0" with "PrgEnv-cray/8.5.0".
+
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) cray-libsci/23.12.5     2) cray-mpich/8.1.28
+
+```
+2. Check CC
+```
+shubhp@nid006942:~/cpp-omp-cray> CC --version
+Cray clang version 17.0.0  (b59b7a8e9169719529cf5ab440f3c301e515d047)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /opt/cray/pe/cce/17.0.0/cce-clang/x86_64/share/../bin
+```
+3. Create executable
+```
+shubhp@nid006942:~/cpp-omp-cray> CC benchmark.cpp -O3 -fopenmp -march=native -o benchmark
+```
+4. Run benchmark
+```
+shubhp@nid006942:~/cpp-omp-cray> ./benchmark -N 4096 -I 10
+Description:
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.034705 (sec) 
+ Matrix fill time is : 0.734741 (sec) 
+ Elapsed time is : 0.206867 (sec) 
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.048180 (sec) 
+ Matrix fill time is : 0.824633 (sec) 
+ Elapsed time is : 0.144693 (sec) 
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.033665 (sec) 
+ Matrix fill time is : 0.825360 (sec) 
+ Elapsed time is : 0.145792 (sec) 
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.036549 (sec) 
+ Matrix fill time is : 0.824833 (sec) 
+ Elapsed time is : 0.148368 (sec) 
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.034103 (sec) 
+ Matrix fill time is : 0.824950 (sec) 
+ Elapsed time is : 0.145473 (sec) 
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.031817 (sec) 
+ Matrix fill time is : 0.824901 (sec) 
+ Elapsed time is : 0.151154 (sec) 
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.047947 (sec) 
+ Matrix fill time is : 0.825290 (sec) 
+ Elapsed time is : 0.145951 (sec) 
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.034175 (sec) 
+ Matrix fill time is : 0.825096 (sec) 
+ Elapsed time is : 0.148288 (sec) 
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.036998 (sec) 
+ Matrix fill time is : 0.824621 (sec) 
+ Elapsed time is : 0.150016 (sec) 
+
+Working on problem size N=4096 
+
+ Memory allocation time is : 0.037769 (sec) 
+ Matrix fill time is : 0.825012 (sec) 
+ Elapsed time is : 0.148020 (sec) 
+
+ First of 10 iterations= 0.206867 (sec)
+Flopcount: 137.472508 GFLOP
+Best (1)      0.144693 sec     950.099535 GFLOPs
+```
+
 ## For Python runs with cray-libsci
 
 1. Hop on a compute node with salloc and load cray-python
