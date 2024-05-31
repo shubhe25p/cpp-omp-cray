@@ -151,16 +151,16 @@ Requested Arguments:
   testseed    : None
 Preparing Matrix arrays
 Memory required: 384.000 MB
-Time for Array Allocation (sec): 0.000021
-Time for Array Initialization (sec): 8.619
+Time for Array Allocation (sec): 0.000026
+Time for Array Initialization (sec): 8.663
 Running matmul...
-Synchronization Overhead (sec): 9.54e-07
-First of 10 iterations (sec): 0.062778
+Synchronization Overhead (sec): 7.15e-07
+First of 10 iterations (sec): 0.065254
 FlopCount: 1.374725e+11
 Iteration (int)   Time(s) Gflop/s
-First (0)         0.06278  2189.8
-Last (9)          0.03570  3850.3
-Best (2)          0.02956  4650.8
+First (0)         0.06525  2106.7
+Last (9)          0.02913  4719.4
+Best (8)          0.02826  4864.9
 ```
 
 Additional env settings for both runs:

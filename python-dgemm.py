@@ -102,9 +102,9 @@ def create_arrays(nsize, xp ):
     print("Memory required: {}".format( memory_string( 3 * nsize * nsize * 8 ) ) )
 
     t_start = time.time()
-    A = xp.zeros((nsize,nsize), dtype=np.float32)
-    B = xp.zeros((nsize,nsize), dtype=np.float32)
-    C = xp.zeros((nsize,nsize), dtype=np.float32)
+    A = xp.zeros((nsize,nsize))
+    B = xp.zeros((nsize,nsize))
+    C = xp.zeros((nsize,nsize))
     t_end = time.time()
     deltat = t_end - t_start
     print("Time for Array Allocation (sec): {:.6f}".format( deltat ) )
