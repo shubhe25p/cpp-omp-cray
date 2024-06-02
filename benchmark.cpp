@@ -47,14 +47,14 @@ int main(int argc, char** argv)
 
    // check to see if there is anything on the command line:
    // -N nnnn    to define the problem size
-   int cmdline_N = -1;
-   int cmdline_I = -1; 
+   int n = 4096;
+   int cmdline_I = 10; 
    int c;
 
    while ( (c = getopt(argc, argv, "N:I:")) != -1) {
       switch(c) {
          case 'N':
-            cmdline_N = std::atoi(optarg == NULL ? "-999" : optarg);
+            n = std::atoi(optarg == NULL ? "-999" : optarg);
             // std::cout << "Command line problem size: " << cmdline_N << std::endl;
             break;
          case 'I':
@@ -65,18 +65,11 @@ int main(int argc, char** argv)
 
 
    std::cout << std::fixed << std::setprecision(6);
-
-   std::vector<int> test_sizes;
    std::vector<double> exec_time;
-
-   if (cmdline_N > 0)
-      test_sizes.push_back(cmdline_N);
+   
 
    /* For each test size */
-   for (int i=0;i<cmdline_I;i++)
-   {
-   for (int n : test_sizes) 
-   {
+   
          std::chrono::time_point<std::chrono::high_resolution_clock> start_time, end_time;
          std::chrono::duration<double> elapsed;
       printf("Working on problem size N=%d \n\n", n);
@@ -109,18 +102,18 @@ int main(int argc, char** argv)
 
                C=AB
            */
+      for (int i=0;i<cmdline_I;i++)
+   {
          start_time = std::chrono::high_resolution_clock::now();
          cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, n, n, n, 1., B, n, A, n, 0. , C, n);
          end_time = std::chrono::high_resolution_clock::now();
 
          elapsed = end_time - start_time;
 
-         std::cout << " Elapsed time is : " << elapsed.count() << " (sec) \n" << std::endl;
+         std::cout << " Elapsed time is : " << elapsed.count() << " (sec) for " << i << " iteration \n" << std::endl;
          exec_time.push_back(elapsed.count());
-
-   } // end loop over problem sizes
    }
-   report_performance(exec_time.data(), cmdline_I, (double)cmdline_N);
+   report_performance(exec_time.data(), cmdline_I, (double)n);
    return 0;
 }
 
