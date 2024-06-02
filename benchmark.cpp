@@ -77,11 +77,13 @@ int main(int argc, char** argv)
          // allocate memory for 6 NxN matrics
          start_time = std::chrono::high_resolution_clock::now();
 
-         std::vector<double> buf(3 * n * n);
-         double* A = buf.data() + 0;
-         double* B = A + n * n;
-         double* C = B + n * n;
-                           
+         // std::vector<double> buf(3 * n * n);
+         // double* A = buf.data() + 0;
+         // double* B = A + n * n;
+         // double* C = B + n * n;
+         double* A = (double*)malloc(n*n*sizeof(double));
+         double* B = (double*)malloc(n*n*sizeof(double));
+         double* C = (double*)malloc(n*n*sizeof(double));   
          end_time = std::chrono::high_resolution_clock::now();
 
          elapsed = end_time - start_time;
@@ -105,7 +107,7 @@ int main(int argc, char** argv)
       for (int i=0;i<cmdline_I;i++)
    {
          start_time = std::chrono::high_resolution_clock::now();
-         cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, n, n, n, 1., B, n, A, n, 0. , C, n);
+         cblas_dgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, n, n, n, 1., B, n, A, n, 1. , C, n);
          end_time = std::chrono::high_resolution_clock::now();
 
          elapsed = end_time - start_time;
